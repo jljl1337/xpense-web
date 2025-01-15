@@ -1,0 +1,27 @@
+{
+  "name": "Xpense Web Dev Container",
+  "dockerFile": "Dockerfile",
+  "build": {
+    "target": "base"
+  },
+  "onCreateCommand": "apk add --no-cache git",
+  "workspaceFolder": "/app",
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolder}",
+      "target": "/app",
+      "type": "bind"
+    }
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "oderwat.indent-rainbow",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  }
+}
