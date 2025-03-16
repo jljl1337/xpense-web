@@ -1,0 +1,109 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install project",
+      "type": "shell",
+      "command": "pnpm i",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install new dependency",
+      "type": "shell",
+      "command": "pnpm add ${input:dependency_name}",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install new development dependency",
+      "type": "shell",
+      "command": "pnpm add ${input:dependency_name} --save-dev",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start development server",
+      "type": "shell",
+      "command": "pnpm run dev",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate production build",
+      "type": "shell",
+      "command": "pnpm run build",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start production server",
+      "type": "shell",
+      "command": "pnpm run start",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run linting",
+      "type": "shell",
+      "command": "pnpm run lint",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Login Supabase account",
+      "type": "shell",
+      "command": "pnpm supabase login",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Link Supabase project",
+      "type": "shell",
+      "command": "pnpm supabase link --project-ref ${input:project_ref}",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate Supabase types",
+      "type": "shell",
+      "command": "pnpm supabase gen types typescript -s juxtext --project-id ${input:project_ref} > src/lib/db/types.g.ts",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "dependency_name",
+      "description": "Dependency name",
+      "default": "new_dependency",
+      "type": "promptString"
+    },
+    {
+      "id": "project_ref",
+      "description": "Project ID",
+      "default": "someprojectid",
+      "type": "promptString"
+    }
+  ]
+}
