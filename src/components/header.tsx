@@ -4,8 +4,11 @@ import { Separator } from "@/components/ui/separator";
 
 import { HeaderDropdown } from "@/components/header-dropdown";
 import { ThemeDropdown } from "@/components/theme-dropdown";
+import { isLoggedIn } from "@/lib/db/auth";
 
 export async function Header() {
+  const isLogged = await isLoggedIn();
+
   return (
     <header className="flex-none flex flex-col">
       <nav className="flex flex-1 items-center justify-between m-3">
@@ -18,7 +21,7 @@ export async function Header() {
         {/* Dropdown buttons */}
         <div className="flex justify-end gap-3">
           <ThemeDropdown />
-          <HeaderDropdown isLogged={false} />
+          <HeaderDropdown isLogged={isLogged} />
         </div>
       </nav>
       <Separator />
