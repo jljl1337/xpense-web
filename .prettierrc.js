@@ -14,6 +14,7 @@ module.exports = {
     "<THIRD_PARTY_MODULES>",
     "",
     "^@/components/ui/(.*)$",
+    "^@/lib/utils$",
     "",
     "^@/(.*)$",
   ],
