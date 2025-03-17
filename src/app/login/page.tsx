@@ -1,3 +1,7 @@
+"use client";
+
+import { useActionState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,10 +12,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 import { cn } from "@/lib/utils";
 
-export default function Login() {
+import { signIn } from "@/lib/actions/auth";
+
+async function handleSubmit(_previousState: unknown, formData: FormData) {
+  return signIn(formData);
+}
+
+export default function LoginPage() {
+  const [error, action, isPending] = useActionState(handleSubmit, null);
+
   return (
     // <div className="h-full flex items-center justify-center">
     //   <h1>Login</h1>
@@ -32,9 +43,11 @@ export default function Login() {
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
+                      name="email"
                       id="email"
                       type="email"
                       placeholder="your@email.com"
+                      disabled={isPending}
                       required
                     />
                   </div>
@@ -48,11 +61,27 @@ export default function Login() {
                         Forgot your password?
                       </a> */}
                     </div>
-                    <Input id="password" type="password" required />
+                    <Input
+                      name="password"
+                      id="password"
+                      type="password"
+                      disabled={isPending}
+                      required
+                    />
                   </div>
-                  <Button type="submit" className="w-full">
-                    Login
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    formAction={action}
+                    disabled={isPending}
+                  >
+                    {isPending ? "Loading..." : "Login"}
                   </Button>
+                  {error && !isPending && (
+                    <div className="text-red-500 text-sm text-center">
+                      {error}
+                    </div>
+                  )}
                   {/* <Button variant="outline" className="w-full">
                     Login with Google
                   </Button> */}
