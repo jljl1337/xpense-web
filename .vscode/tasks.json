@@ -85,7 +85,7 @@
     {
       "label": "Generate Supabase types",
       "type": "shell",
-      "command": "pnpm supabase gen types typescript -s juxtext --project-id ${input:project_ref} > src/lib/db/types.g.ts",
+      "command": "pnpm supabase gen types typescript -s xpense --project-id ${input:project_ref} > src/lib/db/types.g.ts",
       "presentation": {
         "reveal": "always"
       },
