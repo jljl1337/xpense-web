@@ -18,7 +18,6 @@ export async function signIn(formData: FormData) {
     password: formData.get("password"),
   });
 
-  formDataValidation.error?.message;
   if (!formDataValidation.success) {
     return "Please enter a valid email and password.";
   }
