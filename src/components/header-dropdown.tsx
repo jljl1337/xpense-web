@@ -29,9 +29,14 @@ export function HeaderDropdown({ isLogged }: HeaderDropdownProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {isLogged ? (
-          <DropdownMenuItem className="cursor-pointer" onClick={signOut}>
-            Log out
-          </DropdownMenuItem>
+          <>
+            <DropdownMenuItem className="cursor-pointer" asChild>
+              <Link href="/account">Account</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer" onClick={signOut}>
+              Log out
+            </DropdownMenuItem>
+          </>
         ) : (
           <DropdownMenuItem className="cursor-pointer" asChild>
             <Link href="/login">Log in</Link>
