@@ -22,7 +22,7 @@ export async function createBook(
     dataValidation.data.description,
   );
 
-  if (response) {
+  if (response.error) {
     return response;
   }
 

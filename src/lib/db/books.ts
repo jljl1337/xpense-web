@@ -10,9 +10,7 @@ export async function createBook(name: string, description: string) {
     description,
   });
 
-  if (error) {
-    return { error: error.message };
-  }
+  return { error: error?.message };
 }
 
 export async function getBooks() {
