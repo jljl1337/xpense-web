@@ -6,6 +6,13 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -44,49 +51,77 @@ export default function CreateBookPage() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Book Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Trip ABC" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is the name of your book. It is suggested to be unique.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Book Description</FormLabel>
-              <FormControl>
-                <Input placeholder="Optional" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is the description of your book.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Creating..." : "Create"}
-        </Button>
-        {errors.root?.message && !isSubmitting && (
-          <div className="text-red-500 text-sm text-center">
-            {errors.root?.message}
-          </div>
-        )}
-      </form>
-    </Form>
+    <div className="flex h-full w-full items-center justify-center">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">Create new book</CardTitle>
+          <CardDescription>
+            Enter the name and description of your book below.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="h-24">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Book Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Trip ABC"
+                          disabled={isSubmitting}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        This is the name of your book. It is suggested to be
+                        unique.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="h-12"></div>
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Book Description</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Optional"
+                        disabled={isSubmitting}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      This is the description of your book.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="h-12 flex items-center justify-center">
+                {errors.root?.message && !isSubmitting && (
+                  <div className="text-red-500 text-sm text-center">
+                    {errors.root?.message}
+                  </div>
+                )}
+              </div>
+              <div className="flex justify-end">
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Creating..." : "Create"}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
