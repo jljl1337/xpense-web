@@ -5,7 +5,11 @@ import { redirect } from "next/navigation";
 
 import { z } from "zod";
 
-import { createBook as createBookDB } from "@/lib/db/books";
+import {
+  createBook as createBookDB,
+  deleteBook as deleteBookDB,
+} from "@/lib/db/books";
+import { ID_SCHEMA } from "@/lib/schemas/id";
 import { NAME_DESCRIPTION_SCHEMA } from "@/lib/schemas/name-description";
 
 export async function createBook(
@@ -21,6 +25,23 @@ export async function createBook(
     dataValidation.data.name,
     dataValidation.data.description,
   );
+
+  if (response.error) {
+    return response;
+  }
+
+  revalidatePath("/books");
+  redirect("/books");
+}
+
+export async function deleteBook(data: z.infer<typeof ID_SCHEMA>) {
+  const dataValidation = ID_SCHEMA.safeParse(data);
+
+  if (!dataValidation.success) {
+    return { error: "Please enter a valid ID." };
+  }
+
+  const response = await deleteBookDB(dataValidation.data.id);
 
   if (response.error) {
     return response;

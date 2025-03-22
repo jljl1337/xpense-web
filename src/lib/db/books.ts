@@ -20,3 +20,11 @@ export async function getBooks() {
 
   return { data, error: error?.message };
 }
+
+export async function deleteBook(id: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.rpc("delete_book", { id });
+
+  return { error: error?.message };
+}
