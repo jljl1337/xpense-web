@@ -40,7 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+.temp
+
 Dockerfile
+compose.yml
 .dockerignore
+.devcontainer*
 README.md
 .git
+.github
+.vscode

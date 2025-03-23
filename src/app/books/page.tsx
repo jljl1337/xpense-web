@@ -1,15 +1,20 @@
 import { redirect } from "next/navigation";
 
-import { isLoggedIn } from "@/lib/db/auth";
+import BooksClientPage from "./page-client";
 
-export default async function Book() {
+import { isLoggedIn } from "@/lib/db/auth";
+import { getBooks } from "@/lib/db/books";
+
+export default async function BooksPage() {
   if (!(await isLoggedIn())) {
-    redirect("/");
+    redirect("/login");
   }
 
-  return (
-    <div className="h-full flex items-center justify-center">
-      <h1>Book</h1>
-    </div>
-  );
+  const { data: books, error } = await getBooks();
+
+  if (error) {
+    redirect("/error");
+  }
+
+  return <BooksClientPage books={books!} />;
 }

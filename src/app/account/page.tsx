@@ -2,9 +2,9 @@ import { redirect } from "next/navigation";
 
 import { isLoggedIn } from "@/lib/db/auth";
 
-export default async function Account() {
+export default async function AccountPage() {
   if (!(await isLoggedIn())) {
-    redirect("/");
+    redirect("/login");
   }
 
   return (

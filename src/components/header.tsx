@@ -13,9 +13,12 @@ export async function Header() {
     <header className="flex-none flex flex-col">
       <nav className="flex flex-1 items-center justify-between m-3">
         {/* Landing page text */}
-        <div>
+        <div className="flex items-center gap-9">
           <Link href="/">
             <h1 className="text-2xl">Xpense</h1>
+          </Link>
+          <Link href="/books">
+            <h2 className="text-xl">Books</h2>
           </Link>
         </div>
         {/* Dropdown buttons */}
