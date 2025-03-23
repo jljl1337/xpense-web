@@ -21,6 +21,22 @@ export async function getBooks() {
   return { data, error: error?.message };
 }
 
+export async function updateBook(
+  id: string,
+  name: string,
+  description: string,
+) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.rpc("update_book", {
+    id,
+    name,
+    description,
+  });
+
+  return { error: error?.message };
+}
+
 export async function deleteBook(id: string) {
   const supabase = await createClient();
 
