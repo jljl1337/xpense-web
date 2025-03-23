@@ -30,15 +30,13 @@ export default async function EditBookPage({
     redirect("/error");
   }
   const { name, description } = book;
-  const nameValue = name;
-  const descriptionValue = description;
 
   return (
     <NameDescriptionPage
       title={"Edit book"}
       description={"Edit the book details."}
-      nameValue={nameValue}
-      descriptionValue={descriptionValue}
+      nameValue={name}
+      descriptionValue={description}
       nameFieldLabel={"Book Name"}
       descriptionFieldLabel={"Book Description"}
       nameFieldPlaceholder={"Trip ABC"}
