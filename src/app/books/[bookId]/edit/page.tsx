@@ -10,7 +10,7 @@ import { NAME_DESCRIPTION_SCHEMA } from "@/lib/schemas/name-description";
 export default async function EditBookPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ bookId: string }>;
 }) {
   const { data: books, error } = await getBooks();
 
@@ -18,14 +18,18 @@ export default async function EditBookPage({
     redirect("/error");
   }
 
-  const { id } = await params;
+  const { bookId } = await params;
 
   async function action(data: z.infer<typeof NAME_DESCRIPTION_SCHEMA>) {
     "use server";
-    return updateBook({ id, name: data.name, description: data.description });
+    return updateBook({
+      id: bookId,
+      name: data.name,
+      description: data.description,
+    });
   }
 
-  const book = books?.find((book) => book.id === id);
+  const book = books?.find((book) => book.id === bookId);
   if (!book) {
     redirect("/error");
   }
