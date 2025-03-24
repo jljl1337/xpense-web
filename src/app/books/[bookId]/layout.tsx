@@ -11,13 +11,13 @@ export default async function Layout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ id: string }>;
+  params: Promise<{ bookId: string }>;
 }) {
-  const { id } = await params;
+  const { bookId } = await params;
 
   return (
     <SidebarProvider>
-      <BookSidebar bookId={id} />
+      <BookSidebar bookId={bookId} />
       <SidebarInset>
         <SidebarTrigger />
         {children}
