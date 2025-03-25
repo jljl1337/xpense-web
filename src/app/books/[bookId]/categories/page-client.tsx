@@ -10,7 +10,7 @@ import { DataTable } from "@/components/data-table";
 import TableRowDropdown from "@/components/table-row-dropdown";
 import { deleteCategory } from "@/lib/actions/categories";
 import { Category } from "@/lib/db/types";
-import { formatDateFromISO } from "@/lib/formats/date";
+import { formatDateTimeFromISO } from "@/lib/formats/date";
 
 interface CategoriesClientPageProps {
   bookId: string;
@@ -39,7 +39,7 @@ const columns: ColumnDef<Category>[] = [
     accessorKey: "created_at",
     header: "Created At",
     cell: ({ row }) => {
-      const formatted = formatDateFromISO(row.original.created_at);
+      const formatted = formatDateTimeFromISO(row.original.created_at);
 
       return <div>{formatted}</div>;
     },
