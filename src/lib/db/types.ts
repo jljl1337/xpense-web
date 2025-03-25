@@ -4,3 +4,4 @@ export type Book = Database["xpense"]["Tables"]["book"]["Row"];
 export type Category = Database["xpense"]["Tables"]["category"]["Row"];
 export type PaymentMethod =
   Database["xpense"]["Tables"]["payment_method"]["Row"];
+export type Expense = Database["xpense"]["Tables"]["expense"]["Row"];
