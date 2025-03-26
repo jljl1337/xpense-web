@@ -4,8 +4,8 @@ import { createClient } from "@/lib/db/server";
 
 export async function createExpense(
   bookId: string,
-  category_id: string,
-  payment_method_id: string,
+  categoryId: string,
+  paymentMethodId: string,
   date: string,
   amount: number,
   remark: string,
@@ -14,8 +14,8 @@ export async function createExpense(
 
   const { error } = await supabase.rpc("create_expense", {
     book_id: bookId,
-    category_id,
-    payment_method_id,
+    category_id: categoryId,
+    payment_method_id: paymentMethodId,
     date,
     amount,
     remark,
@@ -36,8 +36,8 @@ export async function getExpenses(bookId: string) {
 
 export async function updateExpense(
   id: string,
-  category_id: string,
-  payment_method_id: string,
+  categoryId: string,
+  paymentMethodId: string,
   date: string,
   amount: number,
   remark: string,
@@ -46,8 +46,8 @@ export async function updateExpense(
 
   const { error } = await supabase.rpc("update_expense", {
     id,
-    category_id,
-    payment_method_id,
+    category_id: categoryId,
+    payment_method_id: paymentMethodId,
     date,
     amount,
     remark,
