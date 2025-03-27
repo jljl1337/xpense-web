@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import { formatUTCMidnightDateTimeFromISO } from "../formats/date";
 import { z } from "zod";
 
 import {
@@ -24,7 +25,7 @@ export async function createExpense(data: z.infer<typeof ID_EXPENSE_SCHEMA>) {
     dataValidation.data.id, // bookId
     dataValidation.data.categoryId,
     dataValidation.data.paymentMethodId,
-    dataValidation.data.date,
+    formatUTCMidnightDateTimeFromISO(dataValidation.data.date),
     dataValidation.data.amount,
     dataValidation.data.remark,
   );
@@ -48,7 +49,7 @@ export async function updateExpense(data: z.infer<typeof ID_EXPENSE_SCHEMA>) {
     dataValidation.data.id, // expenseId
     dataValidation.data.categoryId,
     dataValidation.data.paymentMethodId,
-    dataValidation.data.date,
+    formatUTCMidnightDateTimeFromISO(dataValidation.data.date),
     dataValidation.data.amount,
     dataValidation.data.remark,
   );
