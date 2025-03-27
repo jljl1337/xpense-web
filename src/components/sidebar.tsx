@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Book, Edit, Home, LayoutDashboard, List, Wallet } from "lucide-react";
+import { Book, Edit, LayoutDashboard, List, Wallet } from "lucide-react";
 
 import {
   Sidebar,

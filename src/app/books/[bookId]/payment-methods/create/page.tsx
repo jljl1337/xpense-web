@@ -23,7 +23,7 @@ export default async function CreatePaymentMethodPage({
   return (
     <NameDescriptionPage
       title={"Create Payment Method"}
-      description={"Create a new ."}
+      description={"Create a new payment method."}
       nameValue={""}
       descriptionValue={""}
       nameFieldLabel={"Payment Method Name"}
