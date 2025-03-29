@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 import { Book, Edit, LayoutDashboard, List, Wallet } from "lucide-react";
 
@@ -18,6 +21,8 @@ interface BookSidebarProps {
 }
 
 export function BookSidebar({ bookId }: BookSidebarProps) {
+  const segment = useSelectedLayoutSegment();
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -26,7 +31,10 @@ export function BookSidebar({ bookId }: BookSidebarProps) {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="dashboard">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  asChild
+                  isActive={segment === null || segment === "expenses"}
+                >
                   <Link href={`/books/${bookId}`}>
                     <LayoutDashboard />
                     Dashboard
@@ -34,7 +42,7 @@ export function BookSidebar({ bookId }: BookSidebarProps) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem key="category">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={segment === "categories"}>
                   <Link href={`/books/${bookId}/categories`}>
                     <List />
                     Categories
@@ -42,7 +50,10 @@ export function BookSidebar({ bookId }: BookSidebarProps) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem key="payment_method">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  asChild
+                  isActive={segment === "payment-methods"}
+                >
                   <Link href={`/books/${bookId}/payment-methods`}>
                     <Wallet />
                     Payment Methods
@@ -57,7 +68,7 @@ export function BookSidebar({ bookId }: BookSidebarProps) {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="edit">
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={segment === "edit"}>
                   <Link href={`/books/${bookId}/edit`}>
                     <Edit />
                     Edit Book Details
