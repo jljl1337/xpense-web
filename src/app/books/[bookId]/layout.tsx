@@ -19,7 +19,7 @@ export default async function Layout({
     <SidebarProvider>
       <BookSidebar bookId={bookId} />
       <SidebarInset>
-        <SidebarTrigger />
+        <SidebarTrigger className="mx-2 my-2" />
         {children}
       </SidebarInset>
     </SidebarProvider>
