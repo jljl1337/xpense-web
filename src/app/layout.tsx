@@ -37,9 +37,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col h-screen w-screen">
+          <div className="flex flex-col h-screen w-screen overflow-hidden">
             <Header />
-            <main className="flex-1 overflow-hidden">{children}</main>
+            <main className="flex-1 overflow-auto">{children}</main>
           </div>
         </ThemeProvider>
       </body>
