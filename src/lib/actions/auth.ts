@@ -6,17 +6,10 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { signIn as signInDB, signOut as signOutDB } from "@/lib/db/auth";
+import { LOGIN_IN_SCHEMA } from "@/lib/schemas/login-in";
 
-const SIGN_IN_FORMDATA_SCHEMA = z.object({
-  email: z.string().email().trim(),
-  password: z.string().trim(),
-});
-
-export async function signIn(formData: FormData) {
-  const formDataValidation = SIGN_IN_FORMDATA_SCHEMA.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
+export async function signIn(data: z.infer<typeof LOGIN_IN_SCHEMA>) {
+  const formDataValidation = LOGIN_IN_SCHEMA.safeParse(data);
 
   if (!formDataValidation.success) {
     return "Please enter a valid email and password.";
