@@ -38,9 +38,16 @@ export default async function BooksPage({
 
   const pageCount = Math.ceil(booksCount / PAGE_SIZE);
 
-  // If page is greater than pageCount, set it to pageCount
-  if (page > pageCount) {
-    redirect(`/books?page=${pageCount}`);
+  if (booksCount > 0) {
+    // If page is greater than pageCount, set it to pageCount
+    if (page > pageCount) {
+      redirect(`/books?page=${pageCount}`);
+    }
+
+    // If page is less than 1, set it to 1
+    if (page < 1) {
+      redirect(`/books?page=1`);
+    }
   }
 
   return (

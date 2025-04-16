@@ -83,14 +83,16 @@ export default function BooksClientPage({
         </Button>
         <DataTable columns={columns} data={books} />
         <div className="self-end">
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            firstPageUrl={firstPageUrl}
-            lastPageUrl={lastPageUrl}
-            previousPageUrl={previousPageUrl}
-            nextPageUrl={nextPageUrl}
-          />
+          {booksCount > 0 && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              firstPageUrl={firstPageUrl}
+              lastPageUrl={lastPageUrl}
+              previousPageUrl={previousPageUrl}
+              nextPageUrl={nextPageUrl}
+            />
+          )}
         </div>
       </div>
     </div>
