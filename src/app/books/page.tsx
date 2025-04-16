@@ -19,14 +19,18 @@ export default async function BooksPage({
 
   const params = await searchParams;
 
-  // If params.page is string[] or undefined or is not a number, set it to 1
   const page = searchParamToInt(params.page, 1);
 
-  const { data: books, error: booksError } = await getBooks({
+  const booksPromise = getBooks({
     page,
     page_size: PAGE_SIZE,
   });
-  const { data: booksCount, error: booksCountError } = await getBooksCount();
+  const booksCountPromise = getBooksCount();
+
+  const [
+    { data: books, error: booksError },
+    { data: booksCount, error: booksCountError },
+  ] = await Promise.all([booksPromise, booksCountPromise]);
 
   if (booksError || booksCountError) {
     redirect("/error");
