@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 
-import BookDropdown from "./components/book-dropdown";
 import { ColumnDef } from "@tanstack/react-table";
 import { DateTime } from "luxon";
 
 import { Button } from "@/components/ui/button";
 
 import { DataTable } from "@/components/data-table";
+import TableRowDropdown from "@/components/table-row-dropdown";
+import { deleteBook } from "@/lib/actions/books";
 import { Book } from "@/lib/db/types";
 
 const columns: ColumnDef<Book>[] = [
@@ -39,7 +40,16 @@ const columns: ColumnDef<Book>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      return <BookDropdown id={row.original.id} />;
+      const deleteAction = async () => {
+        return deleteBook({ id: row.original.id });
+      };
+
+      return (
+        <TableRowDropdown
+          editUrl={`/books/${row.original.id}/edit`}
+          deleteAction={deleteAction}
+        />
+      );
     },
   },
 ];
