@@ -52,12 +52,12 @@ export default async function BookDashboardPage({
   if (expensesCount > 0) {
     // If page is greater than pageCount, set it to pageCount
     if (page > pageCount) {
-      redirect(`/books?page=${pageCount}`);
+      redirect(`/books/${bookId}?page=${pageCount}`);
     }
 
     // If page is less than 1, set it to 1
     if (page < 1) {
-      redirect(`/books?page=1`);
+      redirect(`/books/${bookId}`);
     }
   }
 
