@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -28,15 +29,11 @@ export function HeaderDropdown({ isLogged }: HeaderDropdownProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuLabel>Version: {process.env.version}</DropdownMenuLabel>
         {isLogged ? (
-          <>
-            <DropdownMenuItem className="cursor-pointer" asChild>
-              <Link href="/account">Account</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer" onClick={signOut}>
-              Log out
-            </DropdownMenuItem>
-          </>
+          <DropdownMenuItem className="cursor-pointer" onClick={signOut}>
+            Log out
+          </DropdownMenuItem>
         ) : (
           <DropdownMenuItem className="cursor-pointer" asChild>
             <Link href="/login">Log in</Link>
