@@ -16,9 +16,8 @@ export async function Header() {
         <div className="flex items-center gap-9">
           <Link href="/">
             <Image
-              className="invert dark:invert-0"
               src="/icon.png"
-              alt="logo"
+              alt="Logo of Xpense"
               width={38}
               height={38}
               priority
