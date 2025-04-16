@@ -14,15 +14,11 @@ export default async function EditCategoryPage({
 }) {
   const { bookId, categoryId } = await params;
 
-  const { data: categories, error } = await getCategories(bookId);
+  const { data: categories, error } = await getCategories({ id: categoryId });
+
+  const category = categories[0];
 
   if (error) {
-    redirect("/error");
-  }
-
-  const category = categories?.find((category) => category.id === categoryId);
-
-  if (!category) {
     redirect("/error");
   }
 

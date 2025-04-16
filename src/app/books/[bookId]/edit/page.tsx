@@ -12,13 +12,13 @@ export default async function EditBookPage({
 }: {
   params: Promise<{ bookId: string }>;
 }) {
-  const { data: books, error } = await getBooks();
+  const { bookId } = await params;
+
+  const { data: books, error } = await getBooks({ id: bookId });
 
   if (error) {
     redirect("/error");
   }
-
-  const { bookId } = await params;
 
   async function action(data: z.infer<typeof NAME_DESCRIPTION_SCHEMA>) {
     "use server";
@@ -29,10 +29,8 @@ export default async function EditBookPage({
     });
   }
 
-  const book = books?.find((book) => book.id === bookId);
-  if (!book) {
-    redirect("/error");
-  }
+  const book = books[0];
+
   const { name, description } = book;
 
   return (

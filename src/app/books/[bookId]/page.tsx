@@ -12,9 +12,9 @@ export default async function BookDashboardPage({
 }) {
   const { bookId } = await params;
 
-  const categoriesPromise = getCategories(bookId);
-  const paymentMethodsPromise = getPaymentMethods(bookId);
-  const expensesPromise = getExpenses(bookId);
+  const categoriesPromise = getCategories({ bookId });
+  const paymentMethodsPromise = getPaymentMethods({ bookId });
+  const expensesPromise = getExpenses({ bookId });
 
   const [
     { data: categories, error: categoriesError },

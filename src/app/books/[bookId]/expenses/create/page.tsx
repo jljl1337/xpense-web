@@ -15,8 +15,8 @@ export default async function CreateExpensePage({
 }) {
   const { bookId } = await params;
 
-  const categoriesPromise = getCategories(bookId);
-  const paymentMethodsPromise = getPaymentMethods(bookId);
+  const categoriesPromise = getCategories({ bookId });
+  const paymentMethodsPromise = getPaymentMethods({ bookId });
 
   const [
     { data: categories, error: categoriesError },

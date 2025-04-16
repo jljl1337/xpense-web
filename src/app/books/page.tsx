@@ -10,7 +10,7 @@ export default async function BooksPage() {
     redirect("/login");
   }
 
-  const { data: books, error } = await getBooks();
+  const { data: books, error } = await getBooks({});
 
   if (error) {
     redirect("/error");
