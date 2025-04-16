@@ -16,9 +16,9 @@ export default async function EditExpensePage({
 }) {
   const { bookId, expenseId } = await params;
 
-  const categoriesPromise = getCategories(bookId);
-  const paymentMethodsPromise = getPaymentMethods(bookId);
-  const expensesPromise = getExpenses(bookId);
+  const categoriesPromise = getCategories({ bookId });
+  const paymentMethodsPromise = getPaymentMethods({ bookId });
+  const expensesPromise = getExpenses({ id: expenseId });
 
   const [
     { data: categories, error: categoriesError },
@@ -30,6 +30,8 @@ export default async function EditExpensePage({
     expensesPromise,
   ]);
 
+  const expense = expenses[0];
+
   if (categoriesError || paymentMethodsError || expensesError) {
     redirect("/error");
   }
@@ -39,12 +41,6 @@ export default async function EditExpensePage({
   }
   if (paymentMethods!.length === 0) {
     redirect(`/books/${bookId}/payment-methods/create`);
-  }
-
-  const expense = expenses!.find((expense) => expense.id === expenseId);
-
-  if (!expense) {
-    redirect(`/books/${bookId}`);
   }
 
   const expenseCategoryId = expense.category_id;

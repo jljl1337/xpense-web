@@ -10,7 +10,7 @@ export default async function CategoriesPage({
 }) {
   const { bookId } = await params;
 
-  const { data: categories, error } = await getCategories(bookId);
+  const { data: categories, error } = await getCategories({ bookId });
 
   if (error) {
     redirect("/error");

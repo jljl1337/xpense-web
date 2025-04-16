@@ -15,8 +15,8 @@ export default async function CreateExpensePage({
 }) {
   const { bookId } = await params;
 
-  const categoriesPromise = getCategories(bookId);
-  const paymentMethodsPromise = getPaymentMethods(bookId);
+  const categoriesPromise = getCategories({ bookId });
+  const paymentMethodsPromise = getPaymentMethods({ bookId });
 
   const [
     { data: categories, error: categoriesError },
@@ -37,11 +37,16 @@ export default async function CreateExpensePage({
   const defaultCategoryId = categories![0].id;
   const defaultPaymentMethodId = paymentMethods![0].id;
 
-  const defaultDate = new Date().toISOString();
+  const today = new Date();
+  const defaultDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  ).toISOString();
 
   async function action(data: z.infer<typeof EXPENSE_SCHEMA>) {
     "use server";
-    return createExpense({
+    const response = await createExpense({
       id: bookId,
       amount: data.amount,
       date: data.date,
@@ -49,6 +54,12 @@ export default async function CreateExpensePage({
       categoryId: data.categoryId,
       paymentMethodId: data.paymentMethodId,
     });
+
+    if (response.error) {
+      return response;
+    }
+
+    redirect(`/books/${bookId}`);
   }
 
   return (

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import { z } from "zod";
 
 import NameDescriptionPage from "@/components/pages/name-description-page";
@@ -13,11 +15,17 @@ export default async function CreateCategoryPage({
 
   async function action(data: z.infer<typeof NAME_DESCRIPTION_SCHEMA>) {
     "use server";
-    return createCategory({
+    const response = await createCategory({
       id: bookId,
       name: data.name,
       description: data.description,
     });
+
+    if (response.error) {
+      return response;
+    }
+
+    redirect(`/books/${bookId}/categories`);
   }
 
   return (

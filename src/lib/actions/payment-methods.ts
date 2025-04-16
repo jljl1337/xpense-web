@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { z } from "zod";
 
@@ -28,12 +27,11 @@ export async function createPaymentMethod(
     dataValidation.data.description,
   );
 
-  if (response.error) {
-    return response;
+  if (!response.error) {
+    revalidatePath(`/books/${dataValidation.data.id}`);
   }
 
-  revalidatePath(`/books/${dataValidation.data.id}`);
-  redirect(`/books/${dataValidation.data.id}/payment-methods`);
+  return response;
 }
 
 export async function updatePaymentMethod(
@@ -51,7 +49,9 @@ export async function updatePaymentMethod(
     dataValidation.data.description,
   );
 
-  revalidatePath("/books");
+  if (!response.error) {
+    revalidatePath("/books");
+  }
 
   return response;
 }
@@ -65,7 +65,9 @@ export async function deletePaymentMethod(data: z.infer<typeof ID_SCHEMA>) {
 
   const response = await deletePaymentMethodDB(dataValidation.data.id);
 
-  revalidatePath("/books");
+  if (!response.error) {
+    revalidatePath("/books");
+  }
 
   return response;
 }

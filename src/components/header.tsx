@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
@@ -12,15 +13,15 @@ export async function Header() {
   return (
     <header className="flex-none flex flex-col">
       <nav className="flex flex-1 items-center justify-between m-3">
-        {/* Landing page text */}
-        <div className="flex items-center gap-9">
-          <Link href="/">
-            <h1 className="text-2xl">Xpense</h1>
-          </Link>
-          <Link href="/books">
-            <h2 className="text-xl">Books</h2>
-          </Link>
-        </div>
+        <Link href="/">
+          <Image
+            src="/icon.png"
+            alt="Logo of Xpense"
+            width={38}
+            height={38}
+            priority
+          />
+        </Link>
         {/* Dropdown buttons */}
         <div className="flex justify-end gap-3">
           <ThemeDropdown />

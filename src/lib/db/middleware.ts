@@ -2,7 +2,10 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { createServerClient } from "@supabase/ssr";
 
-export async function updateSession(request: NextRequest) {
+export async function updateSession(
+  request: NextRequest,
+  publicRoutes: string[],
+) {
   let supabaseResponse = NextResponse.next({
     request,
   });
@@ -31,7 +34,18 @@ export async function updateSession(request: NextRequest) {
   );
 
   // refreshing the auth token
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // if user is not authenticated and the route is not public
+  // redirect to login page
+  const path = request.nextUrl.pathname;
+  const isPublicRoute = publicRoutes.includes(path);
+
+  if (!user && !isPublicRoute) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return supabaseResponse;
 }

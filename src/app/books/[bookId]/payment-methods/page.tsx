@@ -10,7 +10,7 @@ export default async function PaymentMethodsPage({
 }) {
   const { bookId } = await params;
 
-  const { data: paymentMethods, error } = await getPaymentMethods(bookId);
+  const { data: paymentMethods, error } = await getPaymentMethods({ bookId });
 
   if (error) {
     redirect("/error");

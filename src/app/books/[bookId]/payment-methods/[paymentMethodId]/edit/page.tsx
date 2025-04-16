@@ -14,15 +14,15 @@ export default async function EditPaymentMethodPage({
 }) {
   const { bookId, paymentMethodId } = await params;
 
-  const { data: paymentMethods, error } = await getPaymentMethods(bookId);
+  const { data: paymentMethods, error } = await getPaymentMethods({
+    id: paymentMethodId,
+  });
 
   if (error) {
     redirect("/error");
   }
 
-  const paymentMethod = paymentMethods?.find(
-    (paymentMethod) => paymentMethod.id === paymentMethodId,
-  );
+  const paymentMethod = paymentMethods[0];
 
   if (!paymentMethod) {
     redirect("/error");

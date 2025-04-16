@@ -1,3 +1,5 @@
+import { Category } from "@/lib/db/types";
+
 import "server-only";
 
 import { createClient } from "@/lib/db/server";
@@ -18,14 +20,21 @@ export async function createCategory(
   return { error: error?.message };
 }
 
-export async function getCategories(bookId: string) {
+export async function getCategories({
+  id,
+  bookId,
+}: {
+  id?: string;
+  bookId?: string;
+}) {
   const supabase = await createClient();
 
   const { data, error } = await supabase.rpc("get_categories", {
+    id,
     book_id: bookId,
   });
 
-  return { data, error: error?.message };
+  return { data: data as Category[], error: error?.message };
 }
 
 export async function updateCategory(

@@ -1,7 +1,7 @@
 import { Database } from "@/lib/db/types.g";
 
-export type Book = Database["xpense"]["Tables"]["book"]["Row"];
-export type Category = Database["xpense"]["Tables"]["category"]["Row"];
+export type Book = Database["xpense_private"]["Tables"]["book"]["Row"];
+export type Category = Database["xpense_private"]["Tables"]["category"]["Row"];
 export type PaymentMethod =
-  Database["xpense"]["Tables"]["payment_method"]["Row"];
-export type Expense = Database["xpense"]["Tables"]["expense"]["Row"];
+  Database["xpense_private"]["Tables"]["payment_method"]["Row"];
+export type Expense = Database["xpense_private"]["Tables"]["expense"]["Row"];
