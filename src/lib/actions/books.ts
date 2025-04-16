@@ -75,5 +75,6 @@ export async function deleteBook(data: z.infer<typeof ID_SCHEMA>) {
   }
 
   revalidatePath("/books");
-  redirect("/books");
+
+  return response;
 }
