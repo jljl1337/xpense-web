@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import BooksClientPage from "./page-client";
 
 import { searchParamToInt } from "@/lib/conversion";
-import { isLoggedIn } from "@/lib/db/auth";
 import { getBooks, getBooksCount } from "@/lib/db/books";
 
 const PAGE_SIZE = 10;
@@ -13,10 +12,6 @@ export default async function BooksPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  if (!(await isLoggedIn())) {
-    redirect("/login");
-  }
-
   const params = await searchParams;
 
   const page = searchParamToInt(params.page, 1);
