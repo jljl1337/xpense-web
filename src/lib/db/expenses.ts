@@ -78,3 +78,13 @@ export async function deleteExpense(id: string) {
 
   return { error: error?.message };
 }
+
+export async function getExpensesCount({ bookId }: { bookId: string }) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc("get_expenses_count", {
+    book_id: bookId,
+  });
+
+  return { data: data as number, error: error?.message };
+}

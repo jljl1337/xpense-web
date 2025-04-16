@@ -7,6 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 
 import { DataTable } from "@/components/data-table";
+import Pagination from "@/components/pagination";
 import TableRowDropdown from "@/components/table-row-dropdown";
 import { deleteExpense } from "@/lib/actions/expenses";
 import { Category, Expense, PaymentMethod } from "@/lib/db/types";
@@ -17,6 +18,9 @@ interface BookDashboardClientPageProps {
   categories: Category[];
   paymentMethods: PaymentMethod[];
   expenses: Expense[];
+  expensesCount: number;
+  page: number;
+  pageSize: number;
 }
 
 export default function BookDashboardClientPage({
@@ -24,7 +28,17 @@ export default function BookDashboardClientPage({
   categories,
   paymentMethods,
   expenses,
+  expensesCount,
+  page,
+  pageSize,
 }: BookDashboardClientPageProps) {
+  const totalPages = Math.ceil(expensesCount / pageSize);
+  const firstPageUrl = `/books/${bookId}?page=1`;
+  const lastPageUrl = `/books/${bookId}?page=${totalPages}`;
+  const previousPageUrl = page > 1 ? `/books/${bookId}?page=${page - 1}` : "";
+  const nextPageUrl =
+    page < totalPages ? `/books/${bookId}?page=${page + 1}` : "";
+
   const columns: ColumnDef<Expense>[] = [
     {
       accessorKey: "category_id",
@@ -120,6 +134,18 @@ export default function BookDashboardClientPage({
           <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
         </Button>
         <DataTable columns={columns} data={expenses} />
+        <div className="self-end">
+          {expensesCount > 0 && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              firstPageUrl={firstPageUrl}
+              lastPageUrl={lastPageUrl}
+              previousPageUrl={previousPageUrl}
+              nextPageUrl={nextPageUrl}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
