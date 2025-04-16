@@ -29,11 +29,9 @@ export async function createExpense(data: z.infer<typeof ID_EXPENSE_SCHEMA>) {
     dataValidation.data.remark,
   );
 
-  if (response.error) {
-    return response;
+  if (!response.error) {
+    revalidatePath(`/books/${dataValidation.data.id}`);
   }
-
-  revalidatePath(`/books/${dataValidation.data.id}`);
 
   return response;
 }
@@ -54,7 +52,9 @@ export async function updateExpense(data: z.infer<typeof ID_EXPENSE_SCHEMA>) {
     dataValidation.data.remark,
   );
 
-  revalidatePath("/books");
+  if (!response.error) {
+    revalidatePath("/books");
+  }
 
   return response;
 }
@@ -68,7 +68,9 @@ export async function deleteExpense(data: z.infer<typeof ID_SCHEMA>) {
 
   const response = await deleteExpenseDB(dataValidation.data.id);
 
-  revalidatePath("/books");
+  if (!response.error) {
+    revalidatePath("/books");
+  }
 
   return response;
 }

@@ -29,11 +29,9 @@ export async function createBook(
     dataValidation.data.description,
   );
 
-  if (response.error) {
-    return response;
+  if (!response.error) {
+    revalidatePath("/books");
   }
-
-  revalidatePath("/books");
 
   return response;
 }
@@ -53,11 +51,9 @@ export async function updateBook(
     dataValidation.data.description,
   );
 
-  if (response.error) {
-    return response;
+  if (!response.error) {
+    revalidatePath("/books");
   }
-
-  revalidatePath("/books");
 
   return response;
 }
@@ -71,11 +67,9 @@ export async function deleteBook(data: z.infer<typeof ID_SCHEMA>) {
 
   const response = await deleteBookDB(dataValidation.data.id);
 
-  if (response.error) {
-    return response;
+  if (!response.error) {
+    revalidatePath("/books");
   }
-
-  revalidatePath("/books");
 
   return response;
 }

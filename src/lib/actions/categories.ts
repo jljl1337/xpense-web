@@ -27,11 +27,9 @@ export async function createCategory(
     dataValidation.data.description,
   );
 
-  if (response.error) {
-    return response;
+  if (!response.error) {
+    revalidatePath(`/books/${dataValidation.data.id}`);
   }
-
-  revalidatePath(`/books/${dataValidation.data.id}`);
 
   return response;
 }
@@ -51,7 +49,9 @@ export async function updateCategory(
     dataValidation.data.description,
   );
 
-  revalidatePath("/books");
+  if (!response.error) {
+    revalidatePath("/books");
+  }
 
   return response;
 }
@@ -65,7 +65,9 @@ export async function deleteCategory(data: z.infer<typeof ID_SCHEMA>) {
 
   const response = await deleteCategoryDB(dataValidation.data.id);
 
-  revalidatePath("/books");
+  if (!response.error) {
+    revalidatePath(`/books/${dataValidation.data.id}`);
+  }
 
   return response;
 }
