@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { formatUTCMidnightDateTimeFromISO } from "../formats/date";
 import { z } from "zod";
@@ -35,7 +34,8 @@ export async function createExpense(data: z.infer<typeof ID_EXPENSE_SCHEMA>) {
   }
 
   revalidatePath(`/books/${dataValidation.data.id}`);
-  redirect(`/books/${dataValidation.data.id}`);
+
+  return response;
 }
 
 export async function updateExpense(data: z.infer<typeof ID_EXPENSE_SCHEMA>) {

@@ -46,7 +46,7 @@ export default async function CreateExpensePage({
 
   async function action(data: z.infer<typeof EXPENSE_SCHEMA>) {
     "use server";
-    return createExpense({
+    const response = await createExpense({
       id: bookId,
       amount: data.amount,
       date: data.date,
@@ -54,6 +54,12 @@ export default async function CreateExpensePage({
       categoryId: data.categoryId,
       paymentMethodId: data.paymentMethodId,
     });
+
+    if (response.error) {
+      return response;
+    }
+
+    redirect(`/books/${bookId}`);
   }
 
   return (

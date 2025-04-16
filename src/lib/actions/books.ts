@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { z } from "zod";
 
@@ -35,7 +34,8 @@ export async function createBook(
   }
 
   revalidatePath("/books");
-  redirect("/books");
+
+  return response;
 }
 
 export async function updateBook(
@@ -58,7 +58,8 @@ export async function updateBook(
   }
 
   revalidatePath("/books");
-  redirect("/books");
+
+  return response;
 }
 
 export async function deleteBook(data: z.infer<typeof ID_SCHEMA>) {

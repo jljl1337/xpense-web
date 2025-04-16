@@ -22,11 +22,17 @@ export default async function EditBookPage({
 
   async function action(data: z.infer<typeof NAME_DESCRIPTION_SCHEMA>) {
     "use server";
-    return updateBook({
+    const response = await updateBook({
       id: bookId,
       name: data.name,
       description: data.description,
     });
+
+    if (response.error) {
+      return response;
+    }
+
+    redirect(`/books/${bookId}`);
   }
 
   const book = books[0];

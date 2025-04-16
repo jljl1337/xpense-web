@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { z } from "zod";
 
@@ -33,7 +32,8 @@ export async function createCategory(
   }
 
   revalidatePath(`/books/${dataValidation.data.id}`);
-  redirect(`/books/${dataValidation.data.id}/categories`);
+
+  return response;
 }
 
 export async function updateCategory(

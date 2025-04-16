@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import { z } from "zod";
 
 import NameDescriptionPage from "@/components/pages/name-description-page";
@@ -13,11 +15,17 @@ export default async function CreatePaymentMethodPage({
 
   async function action(data: z.infer<typeof NAME_DESCRIPTION_SCHEMA>) {
     "use server";
-    return createPaymentMethod({
+    const response = await createPaymentMethod({
       id: bookId,
       name: data.name,
       description: data.description,
     });
+
+    if (response.error) {
+      return response;
+    }
+
+    redirect(`/books/${bookId}/payment-methods`);
   }
 
   return (
