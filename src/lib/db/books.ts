@@ -1,3 +1,5 @@
+import { Book } from "@/lib/db/types";
+
 import "server-only";
 
 import { createClient } from "@/lib/db/server";
@@ -13,12 +15,24 @@ export async function createBook(name: string, description: string) {
   return { error: error?.message };
 }
 
-export async function getBooks() {
+export async function getBooks({
+  id,
+  page,
+  page_size,
+}: {
+  id?: string;
+  page?: number;
+  page_size?: number;
+}) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.rpc("get_books");
+  const { data, error } = await supabase.rpc("get_books", {
+    id,
+    page,
+    page_size,
+  });
 
-  return { data, error: error?.message };
+  return { data: data as Book[], error: error?.message };
 }
 
 export async function updateBook(

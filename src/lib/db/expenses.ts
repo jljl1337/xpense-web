@@ -1,3 +1,5 @@
+import { Expense } from "@/lib/db/types";
+
 import "server-only";
 
 import { createClient } from "@/lib/db/server";
@@ -24,14 +26,27 @@ export async function createExpense(
   return { error: error?.message };
 }
 
-export async function getExpenses(bookId: string) {
+export async function getExpenses({
+  id,
+  bookId,
+  page,
+  page_size,
+}: {
+  id?: string;
+  bookId?: string;
+  page?: number;
+  page_size?: number;
+}) {
   const supabase = await createClient();
 
   const { data, error } = await supabase.rpc("get_expenses", {
+    id,
     book_id: bookId,
+    page,
+    page_size,
   });
 
-  return { data, error: error?.message };
+  return { data: data as Expense[], error: error?.message };
 }
 
 export async function updateExpense(

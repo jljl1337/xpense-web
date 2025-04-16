@@ -1,3 +1,5 @@
+import { PaymentMethod } from "@/lib/db/types";
+
 import "server-only";
 
 import { createClient } from "@/lib/db/server";
@@ -18,14 +20,21 @@ export async function createPaymentMethod(
   return { error: error?.message };
 }
 
-export async function getPaymentMethods(bookId: string) {
+export async function getPaymentMethods({
+  id,
+  bookId,
+}: {
+  id?: string;
+  bookId?: string;
+}) {
   const supabase = await createClient();
 
   const { data, error } = await supabase.rpc("get_payment_methods", {
+    id,
     book_id: bookId,
   });
 
-  return { data, error: error?.message };
+  return { data: data as PaymentMethod[], error: error?.message };
 }
 
 export async function updatePaymentMethod(
