@@ -1,7 +1,10 @@
-export default function Home() {
-  return (
-    <div className="h-full flex items-center justify-center">
-      <h1>Home</h1>
-    </div>
-  );
+import { redirect } from "next/navigation";
+
+import { isLoggedIn } from "@/lib/db/auth";
+
+export default async function Home() {
+  if (!(await isLoggedIn())) {
+    redirect("/login");
+  }
+  redirect("/books");
 }
