@@ -37,7 +37,12 @@ export default async function CreateExpensePage({
   const defaultCategoryId = categories![0].id;
   const defaultPaymentMethodId = paymentMethods![0].id;
 
-  const defaultDate = new Date().toISOString();
+  const today = new Date();
+  const defaultDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  ).toISOString();
 
   async function action(data: z.infer<typeof EXPENSE_SCHEMA>) {
     "use server";
