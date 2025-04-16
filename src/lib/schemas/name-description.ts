@@ -6,7 +6,7 @@ export const NAME_DESCRIPTION_SCHEMA = z.object({
   name: z
     .string()
     .trim()
-    .min(1, "Name must contain at least 1 non-empty character(s)"),
+    .min(1, "Name must contain at least 1 non-whitespace character"),
   description: z.string().trim(),
 });
 
