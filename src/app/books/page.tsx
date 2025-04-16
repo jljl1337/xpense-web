@@ -45,7 +45,7 @@ export default async function BooksPage({
 
   return (
     <BooksClientPage
-      books={books!}
+      books={books}
       booksCount={booksCount}
       page={page}
       pageSize={PAGE_SIZE}
