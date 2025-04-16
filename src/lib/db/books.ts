@@ -58,3 +58,11 @@ export async function deleteBook(id: string) {
 
   return { error: error?.message };
 }
+
+export async function getBooksCount() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc("get_books_count");
+
+  return { data: data as number, error: error?.message };
+}

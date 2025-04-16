@@ -8,6 +8,7 @@ import { DateTime } from "luxon";
 import { Button } from "@/components/ui/button";
 
 import { DataTable } from "@/components/data-table";
+import Pagination from "@/components/pagination";
 import TableRowDropdown from "@/components/table-row-dropdown";
 import { deleteBook } from "@/lib/actions/books";
 import { Book } from "@/lib/db/types";
@@ -56,9 +57,23 @@ const columns: ColumnDef<Book>[] = [
 
 interface BooksClientPageProps {
   books: Book[];
+  booksCount: number;
+  page: number;
+  pageSize: number;
 }
 
-export default function BooksClientPage({ books }: BooksClientPageProps) {
+export default function BooksClientPage({
+  books,
+  booksCount,
+  page,
+  pageSize,
+}: BooksClientPageProps) {
+  const totalPages = Math.ceil(booksCount / pageSize);
+  const firstPageUrl = `/books?page=1`;
+  const lastPageUrl = `/books?page=${totalPages}`;
+  const previousPageUrl = page > 1 ? `/books?page=${page - 1}` : "";
+  const nextPageUrl = page < totalPages ? `/books?page=${page + 1}` : "";
+
   return (
     <div className="h-full flex items-center justify-center">
       <div className="h-full max-w-[120rem] flex-1 flex flex-col p-8 gap-4">
@@ -67,6 +82,16 @@ export default function BooksClientPage({ books }: BooksClientPageProps) {
           <Link href="/books/create">Create</Link>
         </Button>
         <DataTable columns={columns} data={books} />
+        <div className="self-end">
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            firstPageUrl={firstPageUrl}
+            lastPageUrl={lastPageUrl}
+            previousPageUrl={previousPageUrl}
+            nextPageUrl={nextPageUrl}
+          />
+        </div>
       </div>
     </div>
   );
