@@ -45,7 +45,7 @@ export function PieChartCard({
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className={cn("mx-auto aspect-square", className)}
+          className={cn("mx-auto aspect-auto", className)}
         >
           <PieChart>
             <ChartTooltip

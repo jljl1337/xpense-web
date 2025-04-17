@@ -38,7 +38,7 @@ export default async function TotalByGroupPieChartCard({
 
   return (
     <PieChartCard
-      title="Total by Category"
+      title={`${days ? "Recent" : "Total"} Expenditure`}
       description={`Expenditure of ${days ? `the last ${days}` : "all"} days`}
       chartData={chartData}
       chartConfig={chartConfig}
