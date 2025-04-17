@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 interface PieChartCardProps {
   title?: string;
   description?: string;
-  chartData: Record<string, any>[];
+  chartData: Record<string, unknown>[];
   chartConfig: ChartConfig;
   dataKey: string;
   nameKey: string;

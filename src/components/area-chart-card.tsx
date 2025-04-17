@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 export interface AreaChartCardProps {
   title?: string;
   description?: string;
-  chartData: Record<string, any>[];
+  chartData: Record<string, unknown>[];
   chartConfig: ChartConfig;
   xAxisKey: string;
   className?: string;
@@ -87,7 +87,7 @@ export function AreaChartCard({
                 </linearGradient>
               ))}
             </defs>
-            {dataKeys.map((key, _index) => (
+            {dataKeys.map((key) => (
               <Area
                 key={`area-${key}`}
                 dataKey={key}

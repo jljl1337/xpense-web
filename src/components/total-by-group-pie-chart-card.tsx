@@ -3,10 +3,18 @@ import { redirect } from "next/navigation";
 import { PieChartCard } from "./pie-chart-card";
 
 import { getTotalByGroup } from "@/lib/db/summary";
+import { TotalByGroup } from "@/lib/db/types";
 
 interface TotalByGroupPieChartCardProps {
   bookId: string;
   days?: number;
+}
+
+interface ChartConfig {
+  [key: string]: {
+    label: string;
+    color: string;
+  };
 }
 
 export default async function TotalByGroupPieChartCard({
@@ -22,15 +30,18 @@ export default async function TotalByGroupPieChartCard({
     redirect("/error");
   }
 
-  const chartConfig = totalByGroup.reduce((acc: any, item: any) => {
-    acc[item["id"]] = {
-      label: item["name"],
-      color: `var(--chart-${(Object.keys(acc).length + 1) % 12})`,
-    };
-    return acc;
-  }, {});
+  const chartConfig = totalByGroup.reduce(
+    (acc: ChartConfig, item: TotalByGroup) => {
+      acc[item["id"]] = {
+        label: item["name"],
+        color: `var(--chart-${(Object.keys(acc).length + 1) % 12})`,
+      };
+      return acc;
+    },
+    {},
+  );
 
-  const chartData = totalByGroup.map((item: any) => ({
+  const chartData = totalByGroup.map((item: TotalByGroup) => ({
     id: item["id"],
     value: item["total_amount"],
     fill: `var(--color-${item["id"]})`,
