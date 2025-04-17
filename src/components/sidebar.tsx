@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 
-import { Book, Edit, LayoutDashboard, List, Wallet } from "lucide-react";
+import {
+  Book,
+  Download,
+  Edit,
+  LayoutDashboard,
+  List,
+  Wallet,
+} from "lucide-react";
+import { toast } from "sonner";
 
 import {
   Sidebar,
@@ -16,12 +24,37 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { exportBookToCSV } from "@/lib/actions/books";
+
 interface BookSidebarProps {
   bookId: string;
 }
 
 export function BookSidebar({ bookId }: BookSidebarProps) {
   const segment = useSelectedLayoutSegment();
+
+  const handleDownload = async () => {
+    const loadingToast = toast.loading("Exporting book data...");
+    const { data: csvData, error } = await exportBookToCSV({ id: bookId });
+
+    if (error) {
+      toast.dismiss(loadingToast);
+      toast.error("Failed to export book data");
+      return;
+    }
+
+    const blob = new Blob([csvData!], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "xpense-data.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.dismiss(loadingToast);
+    toast.success("Book data exported successfully!");
+  };
 
   return (
     <Sidebar>
@@ -81,6 +114,15 @@ export function BookSidebar({ bookId }: BookSidebarProps) {
                     <Book />
                     View All Books
                   </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem key="export">
+                <SidebarMenuButton
+                  className="cursor-pointer"
+                  onClick={handleDownload}
+                >
+                  <Download />
+                  Export Book Data
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
