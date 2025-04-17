@@ -1,5 +1,3 @@
-"use server";
-
 import { redirect } from "next/navigation";
 
 import { AreaChartCard } from "@/components/area-chart-card";
@@ -16,7 +14,6 @@ export default async function TrendChart({ bookId }: TrendChartProps) {
   });
 
   if (error) {
-    console.log(error);
     redirect("/error");
   }
   const chartConfig = {
@@ -42,7 +39,7 @@ export default async function TrendChart({ bookId }: TrendChartProps) {
       chartData={chartData}
       chartConfig={chartConfig}
       xAxisKey={"short_date"}
-      className={"h-60"}
+      className={"h-48"}
     />
   );
 }
