@@ -32,7 +32,7 @@ export default async function Layout({
         <div className="mx-2 my-2 flex items-center">
           <SidebarTrigger />
           <Separator orientation="vertical" className="mx-2 h-4" />
-          <div>{books[0].name}</div>
+          <div className="font-bold">{books[0].name}</div>
         </div>
         {children}
       </SidebarInset>

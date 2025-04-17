@@ -4,41 +4,24 @@ import Link from "next/link";
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Button } from "@/components/ui/button";
-
 import { DataTable } from "@/components/data-table";
-import Pagination from "@/components/pagination";
 import TableRowDropdown from "@/components/table-row-dropdown";
 import { deleteExpense } from "@/lib/actions/expenses";
 import { Category, Expense, PaymentMethod } from "@/lib/db/types";
 import { formatDateFromISO, formatDateTimeFromISO } from "@/lib/formats/date";
+import { formatAmount } from "@/lib/formats/number";
 
-interface BookDashboardClientPageProps {
-  bookId: string;
+interface ExpenseTableClientProps {
   categories: Category[];
   paymentMethods: PaymentMethod[];
   expenses: Expense[];
-  expensesCount: number;
-  page: number;
-  pageSize: number;
 }
 
-export default function BookDashboardClientPage({
-  bookId,
+export default function ExpenseTableClient({
   categories,
   paymentMethods,
   expenses,
-  expensesCount,
-  page,
-  pageSize,
-}: BookDashboardClientPageProps) {
-  const totalPages = Math.ceil(expensesCount / pageSize);
-  const firstPageUrl = `/books/${bookId}?page=1`;
-  const lastPageUrl = `/books/${bookId}?page=${totalPages}`;
-  const previousPageUrl = page > 1 ? `/books/${bookId}?page=${page - 1}` : "";
-  const nextPageUrl =
-    page < totalPages ? `/books/${bookId}?page=${page + 1}` : "";
-
+}: ExpenseTableClientProps) {
   const columns: ColumnDef<Expense>[] = [
     {
       accessorKey: "category_id",
@@ -86,6 +69,11 @@ export default function BookDashboardClientPage({
     {
       accessorKey: "amount",
       header: "Amount",
+      cell: ({ row }) => {
+        const formatted = formatAmount(row.original.amount);
+
+        return <div>{formatted}</div>;
+      },
     },
     {
       accessorKey: "remark",
@@ -126,27 +114,5 @@ export default function BookDashboardClientPage({
     },
   ];
 
-  return (
-    <div className="h-full flex items-center justify-center">
-      <div className="h-full max-w-[120rem] flex-1 flex flex-col p-8 gap-4">
-        <h1 className="text-4xl">Dashboard</h1>
-        <Button className="w-24" asChild>
-          <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
-        </Button>
-        <DataTable columns={columns} data={expenses} />
-        <div className="self-end">
-          {expensesCount > 0 && (
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              firstPageUrl={firstPageUrl}
-              lastPageUrl={lastPageUrl}
-              previousPageUrl={previousPageUrl}
-              nextPageUrl={nextPageUrl}
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  return <DataTable columns={columns} data={expenses} />;
 }

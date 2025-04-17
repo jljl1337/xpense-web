@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import {
+  ArrowLeftToLineIcon,
+  ArrowRightToLineIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  ChevronsLeftIcon,
-  ChevronsRightIcon,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,7 @@ export default function Pagination({
       >
         <Link href={firstPageUrl}>
           <span className="sr-only">Go to first page</span>
-          <ChevronsLeftIcon />
+          <ArrowLeftToLineIcon />
         </Link>
       </Button>
       <Button
@@ -77,7 +77,7 @@ export default function Pagination({
       >
         <Link href={lastPageUrl}>
           <span className="sr-only">Go to last page</span>
-          <ChevronsRightIcon />
+          <ArrowRightToLineIcon />
         </Link>
       </Button>
     </div>
