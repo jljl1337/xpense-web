@@ -56,7 +56,7 @@ export default async function BookDashboardPage({
         <Button className="w-24" asChild>
           <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
         </Button>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
           <TotalExpenditureCard bookId={bookId} />
           <TotalExpenditureCard bookId={bookId} days={30} />
           <TotalByGroupPieChartCard bookId={bookId} />
