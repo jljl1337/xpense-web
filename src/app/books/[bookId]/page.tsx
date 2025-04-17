@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 
 import ExpenseTable from "@/components/expense-table";
 import Pagination from "@/components/pagination";
+import TotalByGroupPieChartCard from "@/components/total-by-group-pie-chart-card";
 import TrendChart from "@/components/trend-chart";
 import { searchParamToInt } from "@/lib/conversion";
 import { getExpensesCount } from "@/lib/db/expenses";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 5;
 
 export default async function BookDashboardPage({
   params,
@@ -54,6 +55,7 @@ export default async function BookDashboardPage({
         <Button className="w-24" asChild>
           <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
         </Button>
+        <TotalByGroupPieChartCard bookId={bookId} />
         <TrendChart bookId={bookId} />
         <ExpenseTable bookId={bookId} page={page} pageSize={PAGE_SIZE} />
         <div className="self-end">
