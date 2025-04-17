@@ -52,3 +52,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ secrets.DOCKER_USERNAME }}/xpense-web
           short-description: ${{ github.event.repository.description }}
+          enable-url-completion: true
