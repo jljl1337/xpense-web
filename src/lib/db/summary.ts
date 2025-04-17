@@ -21,6 +21,23 @@ export async function getTrends({
   return { data: data as Trend[], error: error?.message };
 }
 
+export async function getTotal({
+  bookId,
+  days,
+}: {
+  bookId: string;
+  days?: number;
+}) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.rpc("get_total", {
+    book_id: bookId,
+    days,
+  });
+
+  return { data: data as number, error: error?.message };
+}
+
 export async function getTotalByGroup({
   bookId,
   days,
