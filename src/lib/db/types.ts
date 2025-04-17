@@ -10,3 +10,10 @@ export type Trend = {
   date: string;
   total_amount: number;
 };
+
+export type TotalByGroup = {
+  id: string;
+  name: string;
+  description: string;
+  total_amount: number;
+};
