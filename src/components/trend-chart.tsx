@@ -29,6 +29,7 @@ export default async function TrendChart({ bookId }: TrendChartProps) {
     short_date: new Date(trend.date).toLocaleDateString("en-US", {
       month: "short",
       day: "2-digit",
+      timeZone: "UTC",
     }),
   }));
 
