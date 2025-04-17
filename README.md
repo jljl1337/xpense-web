@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="./public/icon.png" alt="Xpense Logo" width="150"/>
+  <img src="./public/icon.png" alt="Xpense Logo" width="100"/>
+</p>
+<p align="center">
+  <img src="./docs/dashboard.png" alt="Xpense Dashboard" width="550"/>
 </p>
 
 # Xpense
@@ -17,4 +20,13 @@ TypeScript, and Supabase.
 ## Demo
 
 You can try out the demo at [xpense.jljl1337.com](https://xpense.jljl1337.com)
-with email `demo@xpense.com` and password `demo1234`.
+with email `demo@xpense.com` and password `demoPassword1234`.
+
+## Usage
+
+1. Set up the backend [xpense-backend](https://github.com/jljl1337/xpense-backend)
+   with Supabase.
+2. Download `compose.yml` and `env.example` and rename the latter to `.env`.
+3. Fill in the `.env` file with your Supabase credentials.
+4. Run `docker compose up -d` to start the application.
+5. Access the application at `http://localhost:3000`.
