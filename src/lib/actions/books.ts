@@ -154,8 +154,8 @@ export async function exportBookToCSV(data: z.infer<typeof ID_SCHEMA>) {
         date: formatDateFromISO(expense.date),
         amount: expense.amount,
         remark: expense.remark,
-        category: category,
-        payment_method: paymentMethod,
+        category: category.name,
+        payment_method: paymentMethod.name,
         created_at: expense.created_at,
         updated_at: expense.updated_at,
       };
