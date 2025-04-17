@@ -23,7 +23,6 @@ export interface AreaChartCardProps {
   chartData: Record<string, any>[];
   chartConfig: ChartConfig;
   xAxisKey: string;
-  xAxisFormatter?: (value: any, index: number) => string;
   className?: string;
 }
 
@@ -33,7 +32,6 @@ export function AreaChartCard({
   chartData,
   chartConfig,
   xAxisKey,
-  xAxisFormatter,
   className,
 }: AreaChartCardProps) {
   // Extract data keys to determine which series to render
@@ -64,7 +62,6 @@ export function AreaChartCard({
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={xAxisFormatter}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <defs>
