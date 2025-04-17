@@ -4,8 +4,10 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 import ExpenseTable from "@/components/expense-table";
+import { NumberCard } from "@/components/number-card";
 import Pagination from "@/components/pagination";
 import TotalByGroupPieChartCard from "@/components/total-by-group-pie-chart-card";
+import TotalExpenditureCard from "@/components/total-expenditure-card";
 import TrendChart from "@/components/trend-chart";
 import { searchParamToInt } from "@/lib/conversion";
 import { getExpensesCount } from "@/lib/db/expenses";
@@ -55,7 +57,12 @@ export default async function BookDashboardPage({
         <Button className="w-24" asChild>
           <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
         </Button>
-        <TotalByGroupPieChartCard bookId={bookId} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <TotalExpenditureCard bookId={bookId} />
+          <TotalExpenditureCard bookId={bookId} days={7} />
+          <TotalByGroupPieChartCard bookId={bookId} />
+          <TotalByGroupPieChartCard bookId={bookId} days={7} />
+        </div>
         <TrendChart bookId={bookId} />
         <ExpenseTable bookId={bookId} page={page} pageSize={PAGE_SIZE} />
         <div className="self-end">
