@@ -1,10 +1,13 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import BookDashboardClientPage from "@/app/books/[bookId]/page-client";
+import { Button } from "@/components/ui/button";
+
+import ExpenseTable from "@/components/expense-table";
+import Pagination from "@/components/pagination";
+import TrendChart from "@/components/trend-chart";
 import { searchParamToInt } from "@/lib/conversion";
-import { getCategories } from "@/lib/db/categories";
-import { getExpenses, getExpensesCount } from "@/lib/db/expenses";
-import { getPaymentMethods } from "@/lib/db/payment-methods";
+import { getExpensesCount } from "@/lib/db/expenses";
 
 const PAGE_SIZE = 10;
 
@@ -21,55 +24,51 @@ export default async function BookDashboardPage({
 
   const page = searchParamToInt(awaitedSearchParams.page, 1);
 
-  const categoriesPromise = getCategories({ bookId });
-  const paymentMethodsPromise = getPaymentMethods({ bookId });
-  const expensesPromise = getExpenses({ bookId, page, page_size: PAGE_SIZE });
-  const expensesCountPromise = getExpensesCount({ bookId });
+  const { data: expensesCount, error } = await getExpensesCount({
+    bookId,
+  });
 
-  const [
-    { data: categories, error: categoriesError },
-    { data: paymentMethods, error: paymentMethodsError },
-    { data: expenses, error: expensesError },
-    { data: expensesCount, error: expensesCountError },
-  ] = await Promise.all([
-    categoriesPromise,
-    paymentMethodsPromise,
-    expensesPromise,
-    expensesCountPromise,
-  ]);
-
-  if (
-    categoriesError ||
-    paymentMethodsError ||
-    expensesError ||
-    expensesCountError
-  ) {
+  if (error) {
     redirect("/error");
   }
 
   const pageCount = Math.ceil(expensesCount / PAGE_SIZE);
 
   if (expensesCount > 0) {
-    // If page is greater than pageCount, set it to pageCount
-    if (page > pageCount) {
-      redirect(`/books/${bookId}?page=${pageCount}`);
-    }
-
-    // If page is less than 1, set it to 1
-    if (page < 1) {
+    if (page < 1 || page > pageCount) {
       redirect(`/books/${bookId}`);
     }
   }
 
+  const totalPages = Math.ceil(expensesCount / PAGE_SIZE);
+  const firstPageUrl = `/books/${bookId}?page=1`;
+  const lastPageUrl = `/books/${bookId}?page=${totalPages}`;
+  const previousPageUrl = page > 1 ? `/books/${bookId}?page=${page - 1}` : "";
+  const nextPageUrl =
+    page < totalPages ? `/books/${bookId}?page=${page + 1}` : "";
+
   return (
-    <BookDashboardClientPage
-      bookId={bookId}
-      categories={categories}
-      paymentMethods={paymentMethods}
-      expenses={expenses}
-      expensesCount={expensesCount}
-      page={page}
-      pageSize={PAGE_SIZE}
-    />
+    <div className="h-full flex items-center justify-center">
+      <div className="h-full max-w-[120rem] flex-1 flex flex-col p-8 gap-4">
+        <h1 className="text-4xl">Dashboard</h1>
+        <Button className="w-24" asChild>
+          <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
+        </Button>
+        <TrendChart bookId={bookId} />
+        <ExpenseTable bookId={bookId} page={page} pageSize={PAGE_SIZE} />
+        <div className="self-end">
+          {expensesCount > 0 && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              firstPageUrl={firstPageUrl}
+              lastPageUrl={lastPageUrl}
+              previousPageUrl={previousPageUrl}
+              nextPageUrl={nextPageUrl}
+            />
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
