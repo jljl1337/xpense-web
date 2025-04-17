@@ -9,6 +9,7 @@ import TableRowDropdown from "@/components/table-row-dropdown";
 import { deleteExpense } from "@/lib/actions/expenses";
 import { Category, Expense, PaymentMethod } from "@/lib/db/types";
 import { formatDateFromISO, formatDateTimeFromISO } from "@/lib/formats/date";
+import { formatAmount } from "@/lib/formats/number";
 
 interface ExpenseTableClientProps {
   categories: Category[];
@@ -68,6 +69,11 @@ export default function ExpenseTableClient({
     {
       accessorKey: "amount",
       header: "Amount",
+      cell: ({ row }) => {
+        const formatted = formatAmount(row.original.amount);
+
+        return <div>{formatted}</div>;
+      },
     },
     {
       accessorKey: "remark",

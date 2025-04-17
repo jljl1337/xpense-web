@@ -45,6 +45,15 @@ const columns: ColumnDef<PaymentMethod>[] = [
     },
   },
   {
+    accessorKey: "updated_at",
+    header: "Updated At",
+    cell: ({ row }) => {
+      const formatted = formatDateTimeFromISO(row.original.updated_at);
+
+      return <div>{formatted}</div>;
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const deleteAction = async () => {

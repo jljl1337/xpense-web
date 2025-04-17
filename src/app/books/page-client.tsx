@@ -3,7 +3,6 @@
 import Link from "next/link";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { DateTime } from "luxon";
 
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +11,7 @@ import Pagination from "@/components/pagination";
 import TableRowDropdown from "@/components/table-row-dropdown";
 import { deleteBook } from "@/lib/actions/books";
 import { Book } from "@/lib/db/types";
+import { formatDateTimeFromISO } from "@/lib/formats/date";
 
 const columns: ColumnDef<Book>[] = [
   {
@@ -31,9 +31,16 @@ const columns: ColumnDef<Book>[] = [
     accessorKey: "created_at",
     header: "Created At",
     cell: ({ row }) => {
-      const formatted = DateTime.fromISO(row.original.created_at).toFormat(
-        "yyyy-MM-dd HH:mm:ss",
-      );
+      const formatted = formatDateTimeFromISO(row.original.created_at);
+
+      return <div>{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "updated_at",
+    header: "Updated At",
+    cell: ({ row }) => {
+      const formatted = formatDateTimeFromISO(row.original.updated_at);
 
       return <div>{formatted}</div>;
     },
