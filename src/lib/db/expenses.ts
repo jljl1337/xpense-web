@@ -29,11 +29,17 @@ export async function createExpense(
 export async function getExpenses({
   id,
   bookId,
+  categoryId,
+  paymentMethodId,
+  remark,
   page,
   page_size,
 }: {
   id?: string;
   bookId?: string;
+  categoryId?: string;
+  paymentMethodId?: string;
+  remark?: string;
   page?: number;
   page_size?: number;
 }) {
@@ -42,6 +48,9 @@ export async function getExpenses({
   const { data, error } = await supabase.rpc("get_expenses", {
     id,
     book_id: bookId,
+    category_id: categoryId,
+    payment_method_id: paymentMethodId,
+    remark,
     page,
     page_size,
   });
@@ -79,11 +88,24 @@ export async function deleteExpense(id: string) {
   return { error: error?.message };
 }
 
-export async function getExpensesCount({ bookId }: { bookId: string }) {
+export async function getExpensesCount({
+  bookId,
+  categoryId,
+  paymentMethodId,
+  remark,
+}: {
+  bookId: string;
+  categoryId?: string;
+  paymentMethodId?: string;
+  remark?: string;
+}) {
   const supabase = await createClient();
 
   const { data, error } = await supabase.rpc("get_expenses_count", {
     book_id: bookId,
+    category_id: categoryId,
+    payment_method_id: paymentMethodId,
+    remark,
   });
 
   return { data: data as number, error: error?.message };
