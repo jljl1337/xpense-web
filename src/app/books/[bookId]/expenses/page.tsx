@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 import ExpenseFilterForm from "@/components/expense-filter-form";
-import ExpenseTable from "@/components/expense-table";
 import Pagination from "@/components/pagination";
+import ExpenseTable from "@/components/tables/expense-table";
 import { searchParamToInt, searchParamToString } from "@/lib/conversion";
 import { getExpensesCount } from "@/lib/db/expenses";
 

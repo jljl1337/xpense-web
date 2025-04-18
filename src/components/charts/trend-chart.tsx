@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { AreaChartCard } from "@/components/area-chart-card";
+import { AreaChartCard } from "@/components/charts/area-chart-card";
 import { getTrends } from "@/lib/db/summary";
 
 interface TrendChartProps {

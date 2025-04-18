@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
 
-import { HeaderDropdown } from "@/components/header-dropdown";
-import { ThemeDropdown } from "@/components/theme-dropdown";
+import { HeaderDropdown } from "@/components/header/header-dropdown";
+import { ThemeDropdown } from "@/components/header/theme-dropdown";
 import { isLoggedIn } from "@/lib/db/auth";
 
 export async function Header() {

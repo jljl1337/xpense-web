@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
-import ExpenseTable from "@/components/expense-table";
-import TotalByGroupPieChartCard from "@/components/total-by-group-pie-chart-card";
-import TotalExpenditureCard from "@/components/total-expenditure-card";
-import TrendChart from "@/components/trend-chart";
+import TotalExpenditureCard from "@/components/cards/total-expenditure-card";
+import TotalByGroupPieChartCard from "@/components/charts/total-by-group-pie-chart-card";
+import TrendChart from "@/components/charts/trend-chart";
+import ExpenseTable from "@/components/tables/expense-table";
 import { getExpensesCount } from "@/lib/db/expenses";
 
 export default async function BookDashboardPage({

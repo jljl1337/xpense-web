@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import ExpenseTableClient from "@/components/expense-table-client";
+import ExpenseTableClient from "@/components/tables/expense-table-client";
 import { getCategories } from "@/lib/db/categories";
 import { getExpenses } from "@/lib/db/expenses";
 import { getPaymentMethods } from "@/lib/db/payment-methods";

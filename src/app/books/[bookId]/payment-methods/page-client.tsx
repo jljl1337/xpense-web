@@ -6,8 +6,8 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 
-import { DataTable } from "@/components/data-table";
 import TableRowDropdown from "@/components/table-row-dropdown";
+import { DataTable } from "@/components/tables/data-table";
 import { deletePaymentMethod } from "@/lib/actions/payment-methods";
 import { PaymentMethod } from "@/lib/db/types";
 import { formatDateTimeFromISO } from "@/lib/formats/date";
