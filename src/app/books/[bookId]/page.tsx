@@ -24,6 +24,10 @@ export default async function BookDashboardPage({
     redirect("/error");
   }
 
+  if (expensesCount < 1) {
+    redirect(`/books/${bookId}/expenses/create`);
+  }
+
   return (
     <div className="h-full flex items-center justify-center">
       <div className="h-full max-w-[120rem] flex-1 flex flex-col p-8 gap-4">
@@ -31,17 +35,13 @@ export default async function BookDashboardPage({
         <Button className="w-24" asChild>
           <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
         </Button>
-        {expensesCount > 0 && (
-          <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-              <TotalExpenditureCard bookId={bookId} />
-              <TotalExpenditureCard bookId={bookId} days={30} />
-              <TotalByGroupPieChartCard bookId={bookId} />
-              <TotalByGroupPieChartCard bookId={bookId} days={30} />
-            </div>
-            <TrendChart bookId={bookId} />
-          </>
-        )}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+          <TotalExpenditureCard bookId={bookId} />
+          <TotalExpenditureCard bookId={bookId} days={30} />
+          <TotalByGroupPieChartCard bookId={bookId} />
+          <TotalByGroupPieChartCard bookId={bookId} days={30} />
+        </div>
+        <TrendChart bookId={bookId} />
         <h2 className="text-2xl">Recent Expenses</h2>
         <ExpenseTable bookId={bookId} page={1} pageSize={5} />
       </div>
