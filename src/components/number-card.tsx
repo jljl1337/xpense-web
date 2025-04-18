@@ -31,7 +31,7 @@ export function NumberCard({
       <CardContent className="flex-1 pb-0">
         <div
           className={cn(
-            "flex items-center justify-center text-4xl font-bold",
+            "flex items-center justify-center text-4xl font-bold truncate",
             className,
           )}
         >
