@@ -4,13 +4,13 @@
 <p align="center">
   <picture>
   <!-- User prefers light mode: -->
-  <source srcset="https://raw.githubusercontent.com/jljl1337/xpense-web/23-feat-add-expense-filtering/docs/dashboard-light.png" media="(prefers-color-scheme: light)" width="550"/>
+  <source srcset="https://raw.githubusercontent.com/jljl1337/xpense-web/main/docs/dashboard-light.png" media="(prefers-color-scheme: light)"/>
 
   <!-- User prefers dark mode: -->
-  <source srcset="https://raw.githubusercontent.com/jljl1337/xpense-web/23-feat-add-expense-filtering/docs/dashboard-dark.png"  media="(prefers-color-scheme: dark)" width="550"/>
+  <source srcset="https://raw.githubusercontent.com/jljl1337/xpense-web/main/docs/dashboard-dark.png"  media="(prefers-color-scheme: dark)"/>
 
   <!-- User has no color preference: -->
-  <img src="https://raw.githubusercontent.com/jljl1337/xpense-web/23-feat-add-expense-filtering/docs/dashboard-light.png" width="550"/>
+  <img src="https://raw.githubusercontent.com/jljl1337/xpense-web/main/docs/dashboard-light.png"/>
   </picture>
 </p>
 
