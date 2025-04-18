@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
-import BooksClientPage from "./page-client";
-
+import BooksClientPage from "@/app/books/page-client";
 import { searchParamToInt } from "@/lib/conversion";
 import { getBooks, getBooksCount } from "@/lib/db/books";
 

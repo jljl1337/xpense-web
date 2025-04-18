@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 
-import { formatUTCMidnightDateTimeFromISO } from "../formats/date";
 import { z } from "zod";
 
 import {
@@ -10,6 +9,7 @@ import {
   deleteExpense as deleteExpenseDB,
   updateExpense as updateExpenseDB,
 } from "@/lib/db/expenses";
+import { formatUTCMidnightDateTimeFromISO } from "@/lib/formats/date";
 import { ID_EXPENSE_SCHEMA } from "@/lib/schemas/expense";
 import { ID_SCHEMA } from "@/lib/schemas/id";
 

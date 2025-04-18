@@ -1,6 +1,5 @@
 "use client";
 
-import { DatePicker } from "../date-picker";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -31,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { DatePicker } from "@/components/date-picker";
 import { Category, PaymentMethod } from "@/lib/db/types";
 import { EXPENSE_SCHEMA } from "@/lib/schemas/expense";
 
