@@ -20,7 +20,8 @@ TypeScript, and Supabase.
 ## Demo
 
 You can try out the demo at [xpense.jljl1337.com](https://xpense.jljl1337.com)
-with email `demo@xpense.com` and password `demoPassword1234`.
+with email `demo@xpense.com` and password `demoPassword1234`. The data is reset
+every hour, so feel free to explore!
 
 ## Usage
 
