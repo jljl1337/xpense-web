@@ -81,7 +81,7 @@ export default function NameDescriptionPage({
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <Card>
+      <Card className="m-4">
         <CardHeader>
           <CardTitle className="text-2xl">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>

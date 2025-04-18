@@ -6,6 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 import "@/app/globals.css";
 
+import { Toaster } from "@/components/ui/sonner";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -41,6 +43,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1 overflow-auto">{children}</main>
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
