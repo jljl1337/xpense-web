@@ -18,3 +18,18 @@ export function searchParamToInt(
 
   return parsed;
 }
+
+export function searchParamToString(
+  searchParam: string | string[] | undefined,
+  defaultValue?: string,
+) {
+  if (Array.isArray(searchParam)) {
+    return defaultValue;
+  }
+
+  if (searchParam === undefined) {
+    return defaultValue;
+  }
+
+  return searchParam;
+}
