@@ -89,7 +89,7 @@ export default function ExpensePage({
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <Card>
+      <Card className="m-4">
         <CardHeader>
           <CardTitle className="text-2xl">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -194,7 +194,7 @@ export default function ExpensePage({
                       <FormLabel>Amount</FormLabel>
                       <FormControl>
                         <Input
-                          // type="number"
+                          type="number"
                           disabled={isSubmitting}
                           {...field}
                         />
