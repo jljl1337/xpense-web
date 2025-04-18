@@ -1,8 +1,17 @@
 <p align="center">
-  <img src="./public/icon.png" alt="Xpense Logo" width="100"/>
+  <img src="https://raw.githubusercontent.com/jljl1337/xpense-web/main/public/icon.png" alt="Xpense Logo" width="100"/>
 </p>
 <p align="center">
-  <img src="./docs/dashboard.png" alt="Xpense Dashboard" width="550"/>
+  <picture>
+  <!-- User prefers light mode: -->
+  <source srcset="https://raw.githubusercontent.com/jljl1337/xpense-web/main/docs/dashboard-light.png" media="(prefers-color-scheme: light)"/>
+
+  <!-- User prefers dark mode: -->
+  <source srcset="https://raw.githubusercontent.com/jljl1337/xpense-web/main/docs/dashboard-dark.png"  media="(prefers-color-scheme: dark)"/>
+
+  <!-- User has no color preference: -->
+  <img src="https://raw.githubusercontent.com/jljl1337/xpense-web/main/docs/dashboard-light.png"/>
+  </picture>
 </p>
 
 # Xpense

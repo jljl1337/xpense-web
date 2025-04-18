@@ -45,6 +45,14 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/xpense-web:latest
             ${{ secrets.DOCKER_USERNAME }}/xpense-web:${{ steps.package-version.outputs.current-version }}
 
+  push_to_registry_description:
+    name: Push Docker Hub description
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:

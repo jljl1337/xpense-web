@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { PieChartCard } from "./pie-chart-card";
-
+import { PieChartCard } from "@/components/charts/pie-chart-card";
 import { getTotalByGroup } from "@/lib/db/summary";
 import { TotalByGroup } from "@/lib/db/types";
 

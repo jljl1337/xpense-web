@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { DataTable } from "@/components/data-table";
 import TableRowDropdown from "@/components/table-row-dropdown";
+import { DataTable } from "@/components/tables/data-table";
 import { deleteExpense } from "@/lib/actions/expenses";
 import { Category, Expense, PaymentMethod } from "@/lib/db/types";
 import { formatDateFromISO, formatDateTimeFromISO } from "@/lib/formats/date";

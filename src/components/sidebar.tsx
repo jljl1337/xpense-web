@@ -5,6 +5,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 
 import {
   Book,
+  DollarSign,
   Download,
   Edit,
   LayoutDashboard,
@@ -64,13 +65,18 @@ export function BookSidebar({ bookId }: BookSidebarProps) {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem key="dashboard">
-                <SidebarMenuButton
-                  asChild
-                  isActive={segment === null || segment === "expenses"}
-                >
+                <SidebarMenuButton asChild isActive={segment === null}>
                   <Link href={`/books/${bookId}`}>
                     <LayoutDashboard />
                     Dashboard
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem key="expense">
+                <SidebarMenuButton asChild isActive={segment === "expenses"}>
+                  <Link href={`/books/${bookId}/expenses`}>
+                    <DollarSign />
+                    Expenses
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

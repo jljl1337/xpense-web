@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { NumberCard } from "./number-card";
-
+import { NumberCard } from "@/components/cards/number-card";
 import { getTotal } from "@/lib/db/summary";
 
 interface TotalExpenditureCardProps {
