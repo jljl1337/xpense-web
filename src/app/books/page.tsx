@@ -14,7 +14,7 @@ export default async function BooksPage({
 }) {
   const params = await searchParams;
 
-  const page = searchParamToInt(params.page, 1);
+  const page = searchParamToInt(params.page, 1)!;
 
   const booksPromise = getBooks({
     page,

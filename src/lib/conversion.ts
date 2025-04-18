@@ -1,6 +1,6 @@
 export function searchParamToInt(
   searchParam: string | string[] | undefined,
-  defaultValue: number = 0,
+  defaultValue?: number,
 ) {
   if (Array.isArray(searchParam)) {
     return defaultValue;

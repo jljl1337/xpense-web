@@ -21,7 +21,7 @@ export default async function ExpensePage({
 
   const awaitedSearchParams = await searchParams;
 
-  const page = searchParamToInt(awaitedSearchParams.page, 1);
+  const page = searchParamToInt(awaitedSearchParams.page, 1)!;
 
   const { data: expensesCount, error } = await getExpensesCount({
     bookId,
