@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
+import ExpenseFilterForm from "@/components/expense-filter-form";
 import ExpenseTable from "@/components/expense-table";
 import Pagination from "@/components/pagination";
 import { searchParamToInt, searchParamToString } from "@/lib/conversion";
@@ -78,10 +79,17 @@ export default async function ExpensePage({
     <div className="h-full flex items-center justify-center">
       <div className="h-full max-w-[120rem] flex-1 flex flex-col p-8 gap-4">
         <h1 className="text-4xl">Expenses</h1>
-        <Button className="w-24" asChild>
-          <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
-        </Button>
-        {expensesCount > 0 && <></>}
+        <div className="flex justify-between items-center">
+          <Button className="w-24" asChild>
+            <Link href={`/books/${bookId}/expenses/create`}>Create</Link>
+          </Button>
+          <ExpenseFilterForm
+            bookId={bookId}
+            categoryId={categoryId}
+            paymentMethodId={paymentMethodId}
+            remark={remark}
+          />
+        </div>
         <ExpenseTable
           bookId={bookId}
           page={page}
