@@ -8,6 +8,7 @@
       "enabled": false
     }
   ],
+  "rangeStrategy": "bump",
   "bumpVersion": "patch",
   "assignees": ["jljl1337"]
 }
