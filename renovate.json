@@ -5,7 +5,7 @@
     {
       "matchManagers": [
         "docker-compose",
-        "docker-file",
+        "dockerfile",
         "github-actions",
         "npm"
       ],
