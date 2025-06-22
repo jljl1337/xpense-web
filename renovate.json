@@ -9,8 +9,10 @@
         "github-actions",
         "npm"
       ],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "{{manager}}"
     }
   ],
+  "bumpVersion": "patch",
   "assignees": ["jljl1337"]
 }
