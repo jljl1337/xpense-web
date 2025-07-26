@@ -17,7 +17,6 @@
 # Xpense
 
 [![Test build](https://github.com/jljl1337/xpense-web/actions/workflows/test_build.yml/badge.svg)](https://github.com/jljl1337/xpense-web/actions/workflows/test_build.yml)
-[![Release](https://github.com/jljl1337/xpense-web/actions/workflows/release.yml/badge.svg)](https://github.com/jljl1337/xpense-web/actions/workflows/release.yml)
 [![Publish](https://github.com/jljl1337/xpense-web/actions/workflows/publish.yml/badge.svg)](https://github.com/jljl1337/xpense-web/actions/workflows/publish.yml)
 [![Source](https://img.shields.io/badge/Source-GitHub-blue?logo=github)](https://github.com/jljl1337/xpense-web)
 [![Docker](https://img.shields.io/badge/Docker-jljl1337%2Fxpense--web-blue?logo=docker)](https://hub.docker.com/r/jljl1337/xpense-web)
